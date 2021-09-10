@@ -1,0 +1,9 @@
+/node_modules
+
+/server/.env
+
+/server/admin.txt
+
+/server/node_modules
+
+/client/node_modules
