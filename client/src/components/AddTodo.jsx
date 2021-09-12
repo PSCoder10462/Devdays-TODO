@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import InputBase from "@material-ui/core/InputBase";
 import "../assets/css/AddTodo.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
-    background: 'transparent',
-    boxShadow: 'none',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.5)'
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    background: "transparent",
+    boxShadow: "none",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    color: 'white',
+    color: "white",
   },
   iconButton: {
     padding: 10,
@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
 function AddTodo() {
   const [todo, setTodo] = useState("");
   const classes = useStyles();
-  const addNewTodo = async (e) => {
+  const addNewTodo = (e) => {
     e.preventDefault();
-    const resp = await fetch(`${process.env.REACT_APP_SERVER}/add`, {
+    fetch(`${process.env.REACT_APP_SERVER}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,9 +42,9 @@ function AddTodo() {
       body: JSON.stringify({
         todo,
       }),
+    }).then((resp) => {
+      setTodo("");
     });
-    setTodo("");
-    console.log(resp);
   };
 
   return (
@@ -53,10 +53,10 @@ function AddTodo() {
         <InputBase
           className={classes.input}
           placeholder="Add Todo"
-          inputProps={{ 'aria-label': 'Add Todo' }}
+          inputProps={{ "aria-label": "Add Todo" }}
           value={todo}
           onChange={(e) => {
-          setTodo(e.target.value);
+            setTodo(e.target.value);
           }}
           required
         />

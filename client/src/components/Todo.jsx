@@ -4,9 +4,8 @@ import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import IconButton from "@material-ui/core/IconButton";
 import "../assets/css/Todo.css";
 
-function Todo({ todo }) {
+function Todo({ todo, deleteTodoFromState, toggleTaskCompletionInState }) {
   const { _id, task, completed } = todo;
-  // console.log(`_id: ${_id}\ntask: ${task}\ncompleted: ${completed}`);
 
   const toggleTaskCompletion = () => {
     fetch(`${process.env.REACT_APP_SERVER}/${_id}`, {
@@ -19,7 +18,7 @@ function Todo({ todo }) {
           completed: !completed,
         },
       }),
-    }).then((resp) => console.log(resp));
+    }).then((resp) => resp.ok && toggleTaskCompletionInState(_id));
   };
 
   const deleteTodo = () => {
@@ -29,7 +28,7 @@ function Todo({ todo }) {
       body: JSON.stringify({
         id: _id,
       }),
-    }).then((resp) => console.log(resp));
+    }).then((resp) => resp.ok && deleteTodoFromState(_id));
   };
 
   return (
