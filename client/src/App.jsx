@@ -58,7 +58,7 @@ function App() {
         <div className="bubble"></div>
       </div>
       <div className="app__body">
-        <h1>Todo list</h1>
+        <h1>Todo List</h1>
         <AddTodo />
         <AllTodos />
       </div>

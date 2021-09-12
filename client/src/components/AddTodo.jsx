@@ -13,12 +13,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     background: "transparent",
     boxShadow: "none",
-    borderBottom: "1px solid rgba(255, 255, 255, 0.5)",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.7)",
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
     color: "white",
+    fontSize: 24,
+    fontWeight: 300,
   },
   iconButton: {
     padding: 10,
@@ -51,6 +53,7 @@ function AddTodo() {
     <div className="addTodo">
       <Paper component="form" className={classes.root} onSubmit={addNewTodo}>
         <InputBase
+          autoFocus
           className={classes.input}
           placeholder="Add Todo"
           inputProps={{ "aria-label": "Add Todo" }}
