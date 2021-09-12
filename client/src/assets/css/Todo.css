@@ -1,0 +1,15 @@
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.todo > p {
+  flex: 1;
+  overflow: scroll;
+}

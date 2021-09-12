@@ -1,30 +1,69 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import "../assets/css/AddTodo.css";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: '2px 4px',
+    display: 'flex',
+    alignItems: 'center',
+    background: 'transparent',
+    boxShadow: 'none',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.5)'
+  },
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
+    color: 'white',
+  },
+  iconButton: {
+    padding: 10,
+  },
+  divider: {
+    height: 28,
+    margin: 4,
+  },
+}));
 
 function AddTodo() {
   const [todo, setTodo] = useState("");
-
-  const addNewTodo = (e) => {
+  const classes = useStyles();
+  const addNewTodo = async (e) => {
     e.preventDefault();
-    alert(`TODO:\n${todo}`);
+    const resp = await fetch(`${process.env.REACT_APP_SERVER}/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        todo,
+      }),
+    });
+    setTodo("");
+    console.log(resp);
   };
 
   return (
     <div className="addTodo">
-      <form onSubmit={addNewTodo}>
-        <TextField
-          label="Add new todo"
+      <Paper component="form" className={classes.root} onSubmit={addNewTodo}>
+        <InputBase
+          className={classes.input}
+          placeholder="Add Todo"
+          inputProps={{ 'aria-label': 'Add Todo' }}
           value={todo}
           onChange={(e) => {
-            setTodo(e.target.value);
+          setTodo(e.target.value);
           }}
+          required
         />
         <IconButton type="submit">
           <SendRoundedIcon />
         </IconButton>
-      </form>
+      </Paper>
     </div>
   );
 }

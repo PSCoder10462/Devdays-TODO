@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const todo = new mongoose.Schema(
+const todoSchema = new mongoose.Schema(
   {
     task: { type: String, required: true },
-    completed: { type: Boolean, required: false },
+    completed: { type: Boolean, default: false },
   },
   { collection: "todo-list" }
 );
 
-const model = mongoose.model("TodoModel", todo);
+const model = mongoose.model("todo", todoSchema);
 
 export default model;

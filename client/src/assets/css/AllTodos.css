@@ -1,0 +1,10 @@
+.allTodos {
+  height: 45vh;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+  display: none;
+}
